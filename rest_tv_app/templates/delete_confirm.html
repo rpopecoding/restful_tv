@@ -1,0 +1,17 @@
+<head>
+  <title>Delete Show</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <h3>Are you sure you want to delete</h3>
+  <h1>{{show.title}}</h1>
+  <h3>from database?</h3>
+  <form action="/make_delete" method="POST">
+    {% csrf_token %}
+    <input hidden="show_id" id="show_id" name="show_id" value="{{show.id}}" />
+    <button type="submit">Confirm Delete</button>
+  </form>
+  <a href="/shows/{{show.id}}">No, return to show page.</a>
+</body>

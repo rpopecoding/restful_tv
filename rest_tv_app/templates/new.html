@@ -1,0 +1,31 @@
+<head>
+  <title>Add New Show</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <h1>Add New Show</h1>
+  <div class="wrapper">
+    <form action="/create" method="POST">
+      {% csrf_token %}
+      <div>
+        <label for="title"><p>Title:</p></label>
+        <input type="text" id="title" name="title" />
+      </div>
+      <div class="midsplit">
+        <label for="network"><p>Network:</p></label>
+        <input type="text" id="network" name="network" />
+      </div>
+      <div class="midsplit">
+        <label for="date"><p>Start Date:</p></label>
+        <input type="date" id="date" name="date" />
+      </div>
+      <label for="desc"><p>Description:</p></label>
+      <input type="textarea" id="desc" name="desc" />
+
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+  <a href="/shows">Return to shows</a>
+</body>

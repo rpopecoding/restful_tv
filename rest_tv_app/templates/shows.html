@@ -1,0 +1,33 @@
+<head>
+  <title>Main Show Page</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<main>
+  <h1>All Shows</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Network</th>
+      <th>Realease Date</th>
+      <th>Actions</th>
+    </tr>
+    {% for show in all_shows %}
+    <tr>
+      <td>{{show.id}}</td>
+      <td>{{show.title}}</td>
+      <td>{{show.network}}</td>
+      <td>{{show.start_date}}</td>
+      <td>
+        <a href="/shows/{{show.id}}">Show</a> |
+        <a href="/shows/edit/{{show.id}}">Edit</a> |
+        <a href="/shows/delete/{{show.id}}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <a href="/new"><p>Add a new show!</p></a>
+</main>

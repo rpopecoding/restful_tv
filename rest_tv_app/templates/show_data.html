@@ -1,0 +1,14 @@
+<head>
+  <title>Information for {{show.title}}</title>
+</head>
+
+<body>
+  <h1>{{show.title}}</h1>
+  <h2>ID: {{show.id}}</h2>
+  <h3>Started {{show.start_date}} on {{show.network}}</h3>
+  <h2>Comments</h2>
+  <p>{{show.desc}}</p>
+  <a href="/shows/edit/{{show.id}}"><h4>Edit</h4></a>
+  <a href="/shows/delete/{{show.id}}"><h5>Delete</h5></a>
+  <a href="/shows">Return to shows</a>
+</body>

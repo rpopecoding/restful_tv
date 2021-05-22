@@ -1,0 +1,36 @@
+<head>
+  <title>Edit Show</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <h1>EDIT</h1>
+  <div class="wrapper">
+    <form action="/make_edit" method="POST">
+      {% csrf_token %}
+      <div>
+        <label for="title"><p>Title:</p></label>
+        <input type="text" id="title" name="title" value="{{show.title}}" />
+      </div>
+      <div class="midsplit">
+        <label for="network"><p>Network:</p></label>
+        <input
+          type="text"
+          id="network"
+          name="network"
+          value="{{show.network}}"
+        />
+      </div>
+      <div class="midsplit">
+        <label for="date"><p>Start Date:</p></label>
+        <input type="date" id="date" name="date" value="{{datestr}}" />
+      </div>
+      <label for="desc"><p>Description:</p></label>
+      <input type="textarea" id="desc" name="desc" value="{{show.desc}}" />
+      <input hidden="show_id" id="show_id" name="show_id" value="{{show.id}}" />
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+  <a href="/shows/{{show.id}}">Return to show page.</a>
+</body>
