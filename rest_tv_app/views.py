@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse 
 from .models import Tv_show
+from django.contrib import messages
 
 # Create your views here.
 
@@ -19,14 +20,24 @@ def new(request):
     return render(request, "new.html")
 
 def create(request):
-    if request.method == "POST":        
-
+    if request.method == "POST":
+            
+        errors = Tv_show.objects.basic_validator(request.POST)
+       
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect("/new")
+            
         title = request.POST['title']
         network = request.POST['network']
         start_date = request.POST['date']
         desc = request.POST['desc']
-    
-        Tv_show.objects.create(title=title, network=network, start_date = start_date, desc=desc)
+
+        if len(desc) == 0:
+            Tv_show.objects.create(title=title, network=network, start_date = start_date)
+        else:
+            Tv_show.objects.create(title=title, network=network, start_date = start_date, desc=desc)
 
         
         redir = ''
@@ -59,8 +70,17 @@ def edit(request, render_id):
 
 def make_edit(request):
     if request.method == "POST":
+
         show_id =request.POST['show_id']
         show = Tv_show.objects.get(id=show_id)
+
+        errors = Tv_show.objects.basic_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect("/shows/edit/"+ show_id)
+
+
         
         show.title = request.POST['title']
         show.date = request.POST['date']
